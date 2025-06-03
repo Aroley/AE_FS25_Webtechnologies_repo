@@ -1,79 +1,130 @@
-h1, h2, h3, h4, h5, h6, p {
-    font-family: Arial, sans-serif;
-    padding: 0.5rem;
-    color: rgb(12, 10, 12);
-    text-align: center;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: Arial, sans-serif;
+  padding: 0.5rem;
+  color: rgb(12, 10, 12);
+  text-align: center;
 }
 
 h1 {
-    font-size: 5rem;
-    color: rgb(132, 0, 221);
-    
+  font-size: 5rem;
+  color: rgb(132, 0, 221);
 }
 
 h2 {
-    font-size: 2.5rem;
-
+  font-size: 2.5rem;
 }
 
 h3 {
-    font-size: 2rem;
-
+  font-size: 2rem;
+  padding: 0.2rem;
+  margin: 0.2rem;
 }
 
 h4 {
-    font-size: 1.5rem;
-
+  font-size: 1.5rem;
 }
 
 h5 {
-    font-size: 1.2rem;
-
+  font-size: 1.2rem;
 }
 
 h6 {
-    font-size: 1rem;
-
+  font-size: 1rem;
 }
 
-
 p {
-    font-size: 2rem;
-    padding-bottom: 2rem;
-    max-width: 60%;
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  max-width: 60%;
 }
 
 a {
-    color: rgb(132, 0, 221);
-    text-decoration: none;
+  color: rgb(132, 0, 221);
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 img {
-    padding: 1rem;
-    width: 20%;
-    height: auto;
+  padding: 1rem;
+  width: 20%;
+  height: auto;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
 }
 
 section {
-    padding: 2rem;
-    margin: 0 auto;
-    max-width: 60%;
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 60%;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.cardspace {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0rem;
+  margin: 1rem;
+  width: 100%;
+  max-width: 30%;
+  border-radius: 8px;
+}
+
+.cardtext {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.1rem;
+  color: rgb(12, 10, 12);
+  margin: 0.1rem;
+}
+
+.cardimage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0px 0px;
+  margin: 0rem;
+  padding: 0rem;
+}
+
+.cardcontent {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
