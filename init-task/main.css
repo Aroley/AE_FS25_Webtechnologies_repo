@@ -104,6 +104,11 @@ section {
   border-radius: 8px;
 }
 
+.card:hover {
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
 .cardtext {
   text-align: center;
   font-size: 1.2rem;
