@@ -3,7 +3,7 @@
   font-family: "inter-variable", sans-serif;
   font-variation-settings: "wght" 400, "slnt" 0;
   padding: 0.5rem;
-  color: rgb(12, 10, 12);
+  color: #0026a0;
   text-align: left;
 }
 
@@ -27,47 +27,57 @@ html {
   align-items: center;
   color: #0026a0;
   text-align: center;
-  padding: 1rem;
+  padding: 0 1rem;
   text-decoration: none;
   font-weight: 400;
   font-size: 1.8rem;
 }
 
-.topnav a:hover {
+.nav-links a:hover {
   background-color: #e2edff;
   border-radius: 1rem;
 }
 
 .topnav a.active {
   background-color: #0026a0;
-  color: white;
+  color: #fff;
   border-radius: 1rem;
 }
 
-.topnav .search-container {
-  float: right;
-}
-
 .topnav input[type="text"] {
+  color: #0026a0;
+  width: 60%;
   justify-content: flex-end;
   align-items: center;
   padding: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   border: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: none;
+}
+
+::placeholder {
+  color: #e2edff;
+  opacity: 1; /* Firefox */
+}
+
+.btn-search img {
+  width: 2.5rem;
+  height: auto;
 }
 
 .topnav .search-container button {
   float: right;
+  width: 60%;
   padding: 0.5rem 1rem;
   margin-right: 1rem;
   background: #fff;
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
-}
-
-.topnav .search-container button:hover {
-  background: #e2edff;
 }
 
 .leftnav {
@@ -98,6 +108,47 @@ html {
   width: 60%;
   height: 100%;
   padding: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: #e2edff 2px solid;
+  border-radius: 12rem;
+}
+.form-container:focus-within {
+  border-color: #0026a0;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav .search-container button:hover {
+  background: #e2edff;
+}
+
+.btn-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #0026a0;
+  padding: 1rem 2rem;
+  border: none;
+  font-size: 1.5rem;
+  text-decoration: none;
 }
 
 a.btn {
@@ -250,7 +301,7 @@ section {
   text-align: center;
   font-size: 1.2rem;
   padding: 0.1rem;
-  color: rgb(12, 10, 12);
+  color: #0026a0;
   margin: 0.1rem;
 }
 
