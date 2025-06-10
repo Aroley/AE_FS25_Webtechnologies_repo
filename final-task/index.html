@@ -2,49 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Surprise Alcoholism</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="./js/main.js" defer></script>
+    <script src="js/main.js" defer></script>
   </head>
-
   <body>
-    <!-- Drink highlight -->
-    <section id="special">
+    <div class="container">
+      <!-- Hero Section -->
       <div class="hero">
-        <h3>Drink of the day</h3>
-        <h4 class="hero-tagline">Get inspired to get wasted!</h4>
-        <div class="dotd-card">
-          <h2 data-js="title">
-            <!-- display title after loading data -->
-          </h2>
-
-          <div data-js="photo" class="main-image">
-            <!-- append image later in here -->
-          </div>
-
-          <div data-js="description" class="description">
-            <!-- append description later in here -->
-          </div>
+        <h1>Surprise Alcoholism</h1>
+        <p>Get inspired to get wasted!</p>
+        <div class="dotd-container">
+          <div id="drink-of-day"></div>
         </div>
       </div>
-    </section>
-    <!-- Filter -->
-    <section id="filters">
+
+      <!-- Filter Menu -->
       <div class="filter-menu">
-        <button class="filter-btn active" data-type="all">All</button>
+        <button class="filter-btn active" data-type="All">All Drinks</button>
         <button class="filter-btn" data-type="Alcoholic">Alcoholic</button>
-        <button class="filter-btn" data-type="Non alcoholic">Non-Alcoholic</button>
+        <button class="filter-btn" data-type="Non alcoholic">
+          Non-Alcoholic
+        </button>
+        <button class="filter-btn" data-type="Optional alcohol">
+          Optional Alcohol
+        </button>
       </div>
-    </section>
-    
-    
-    <section id="menu">
-      <div class="drink-menu">
-        <!-- Drink cards will be appended here -->
+
+      <!-- Drinks Grid -->
+      <div class="drinks-grid" id="drinks-grid"></div>
+
+      <!-- Load More Button -->
+      <div class="load-more-container">
+        <button class="load-more-btn" id="load-more-btn">
+          Load More Drinks
+        </button>
       </div>
-    </section>
-    </section>
+    </div>
+
+    <!-- Recipe Overlay -->
+    <div class="recipe-overlay" id="recipe-overlay">
+      <div class="recipe-content">
+        <button class="close-btn" id="close-modal">&times;</button>
+        <div id="recipe-details"></div>
+      </div>
+    </div>
   </body>
 </html>

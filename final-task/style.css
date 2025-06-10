@@ -1,127 +1,435 @@
-/* general */
-body {
-  font-family: "Georgia", serif;
-  background-color: #fafafa;
-  color: #333;
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background: #e9ece7;
+  color: #2b342b;
+  line-height: 1.5;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 0 auto;
   padding: 2rem;
-  line-height: 1.6;
 }
 
-section {
-  margin-bottom: 4rem;
-}
-
+/* Hero Section */
 .hero {
   text-align: center;
-  max-width: 800px;
-  margin: auto;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeInDown 0.8s ease-out forwards;
 }
 
-h3,
-h4 {
-  font-weight: normal;
-  color: #444;
-}
-
-/* drink of the day */
-.dotd-card {
-  margin-top: 2rem;
-}
-
-/* filter */
-.filter-menu {
+.hero h1 {
+  position: absolute;
+  font-family: "Oi", serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  max-width: 100%;
+  font-size: 12rem;
   text-align: center;
+  margin: auto;
+  z-index: -1;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #2b342b;
   margin-bottom: 2rem;
 }
 
+.dotd-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* Filters */
+.filter-menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
 .filter-btn {
-  padding: 0.6rem 1.2rem;
-  margin: 0 0.5rem;
-  border: 1px solid #ccc;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #2b342b;
   background: white;
-  font-size: 0.9rem;
+  color: #2b342b;
+  border-radius: 4rem;
   cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
-}
-
-.filter-btn.active {
-  background-color: #000;
-  color: white;
-  border-color: #000;
-}
-
-/* menu */
-.drink-menu {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.card {
+  font-size: 1rem;
+  transition: all 0.3s ease;
   position: relative;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
   overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #222;
-}
-
-.main-image img {
-  width: 100%;
-  border-radius: 12px;
-  filter: contrast(0.85) sepia(0.2);
-  transition: filter 0.3s ease;
-}
-
-.card:hover img {
-  filter: contrast(1) sepia(0.05);
-}
-
-.description {
-  font-size: 0.9rem;
-  margin-top: 1rem;
-}
-
-/* Hidden recipe box */
-.full-recipe {
+.filter-btn::before {
+  content: "";
   position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #61ee03;
+  transition: top 0.3s ease;
+  z-index: -1;
+}
+
+.filter-btn:hover::before,
+.filter-btn.active::before {
+  top: 0;
+}
+
+.filter-btn:hover {
+  color: #2b342b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
+}
+.filter-btn.active {
+  color: #2b342b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
+  font-weight: 600;
+}
+
+/* Drinks Grid */
+.drinks-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.drink-card {
+  flex: 0 1 30%;
+  flex-direction: row;
+  height: 12rem;
+  text-align: center;
+  background: white;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  transform: translateY(2rem);
+  min-width: 420px;
+}
+
+.drink-card h3 {
+  font-family: "Georgia", serif;
+  font-weight: 600;
+}
+
+.drink-card.fade-in {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.drink-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
+}
+
+.drink-image {
+  position: relative;
+  aspect-ratio: 1/1;
+  width: 40%;
+  overflow: hidden;
+}
+
+.drink-image img {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.drink-card:hover .drink-image img {
+  transform: scale(1.05);
+}
+
+.recipe-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.recipe-btn:hover {
+  background: white;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.drink-info {
+  padding: 1.5rem;
+  width: 55%;
+}
+
+.drink-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2b342b;
+  margin-bottom: 1rem;
+}
+
+.drink-badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 5%;
+  min-width: 2rem;
+}
+
+.drink-badge {
+  position: relative;
+  text-wrap: nowrap;
+  text-align: center;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transform: rotate(-90deg);
+}
+
+.badge-alcoholic {
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+.badge-non-alcoholic {
+  background: linear-gradient(45deg, #27ae60, #229954);
+  color: white;
+}
+
+.badge-optional {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+  color: white;
+}
+
+.drink-details {
+  color: #2b342b;
+  font-size: 0.9rem;
+}
+
+.drink-details p {
+  margin-bottom: 0.5rem;
+}
+
+/* Recipe Modal */
+.recipe-overlay {
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.98);
-  color: #111;
-  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.recipe-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.recipe-content {
+  background: #2b342b;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: #e9ece7;
+  max-width: 500px;
+  max-height: 80vh;
   overflow-y: auto;
-  transform: translateY(100%);
+  position: relative;
+  transform: scale(0.8);
   transition: transform 0.3s ease;
-  z-index: 10;
 }
 
-.card:hover .full-recipe {
-  transform: translateY(0);
+.recipe-overlay.show .recipe-content {
+  transform: scale(1);
 }
 
-.full-recipe h4 {
-  margin-top: 0;
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #2b342b;
+  transition: color 0.3s ease;
 }
 
-.full-recipe ul {
-  list-style: disc;
-  padding-left: 1.2rem;
+.close-btn:hover {
+  color: #2b342b;
+}
+
+.recipe-title {
+  font-size: 1.5rem;
+  color: #61ee03;
   margin-bottom: 1rem;
+}
+
+.ingredients-list {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.ingredients-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ece7;
+}
+
+.instructions {
+  color: #e9ece7;
+  line-height: 1.8;
+}
+
+/* Load More Button */
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.load-more-btn {
+  padding: 1rem 2rem;
+  background: #2b342b;
+  color: #e9ece7;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.load-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+}
+
+.load-more-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.load-more-btn.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .drinks-grid {
+    gap: 1rem;
+  }
+
+  .drink-card {
+    flex: 1 1 100%;
+    max-width: 400px;
+  }
+
+  .filter-menu {
+    gap: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
 }
