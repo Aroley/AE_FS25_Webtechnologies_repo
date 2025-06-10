@@ -64,7 +64,7 @@ class CocktailApp {
     const loadBtn = document.getElementById("load-more-btn");
     loadBtn.disabled = true;
     loadBtn.classList.add("loading");
-    loadBtn.textContent = "Loading...";
+    loadBtn.textContent = "";
 
     try {
       const promises = Array.from({ length: count }, () =>
@@ -82,11 +82,6 @@ class CocktailApp {
       newDrinks.forEach((drink, index) => {
         const card = this.createDrinkCard(drink);
         grid.appendChild(card);
-
-        // Staggered animation
-        setTimeout(() => {
-          card.classList.add("fade-in");
-        }, index * 100);
       });
 
       this.applyFilter(this.currentFilter);

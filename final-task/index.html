@@ -8,38 +8,43 @@
     <script src="js/main.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <!-- Hero Section -->
-      <div class="hero">
-        <h1>Surprise Alcoholism</h1>
-        <p>Get inspired to get wasted!</p>
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="container">
+        <h1 class="bg-text">Surprise Alcoholism</h1>
+        <p>get inspired, get wasted</p>
         <div class="dotd-container">
           <div id="drink-of-day"></div>
         </div>
       </div>
+    </section>
 
-      <!-- Filter Menu -->
-      <div class="filter-menu">
-        <button class="filter-btn active" data-type="All">All Drinks</button>
-        <button class="filter-btn" data-type="Alcoholic">Alcoholic</button>
-        <button class="filter-btn" data-type="Non alcoholic">
-          Non-Alcoholic
-        </button>
-        <button class="filter-btn" data-type="Optional alcohol">
-          Optional Alcohol
-        </button>
+    <!-- Main Content -->
+    <section id="content">
+      <div class="container">
+        <!-- Filter Menu -->
+        <div class="filter-menu">
+          <button class="filter-btn active" data-type="All">All Drinks</button>
+          <button class="filter-btn" data-type="Alcoholic">Alcoholic</button>
+          <button class="filter-btn" data-type="Non alcoholic">
+            Non-Alcoholic
+          </button>
+          <button class="filter-btn" data-type="Optional alcohol">
+            Optional Alcohol
+          </button>
+        </div>
+
+        <!-- Drinks Grid -->
+        <div class="drinks-grid" id="drinks-grid"></div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+          <button class="load-more-btn" id="load-more-btn">
+            Load More Drinks
+          </button>
+        </div>
       </div>
-
-      <!-- Drinks Grid -->
-      <div class="drinks-grid" id="drinks-grid"></div>
-
-      <!-- Load More Button -->
-      <div class="load-more-container">
-        <button class="load-more-btn" id="load-more-btn">
-          Load More Drinks
-        </button>
-      </div>
-    </div>
+    </section>
 
     <!-- Recipe Overlay -->
     <div class="recipe-overlay" id="recipe-overlay">

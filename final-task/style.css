@@ -6,7 +6,13 @@
 }
 
 body {
-  background: #e9ece7;
+  background: url(img/AdobeStock_147226346.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+  height: 300vh;
   color: #2b342b;
   line-height: 1.5;
 }
@@ -15,41 +21,57 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  max-width: 80%;
+  width: 80%;
   margin: 0 auto;
-  padding: 2rem;
 }
 
 /* Hero Section */
-.hero {
+#hero {
+  display: flex;
+  justify-content: center;
   text-align: center;
-  margin-bottom: 3rem;
   opacity: 0;
   animation: fadeInDown 0.8s ease-out forwards;
+  background-color: #e9ece7;
+  height: 100vh;
 }
 
-.hero h1 {
-  position: absolute;
+#drink-of-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+#hero h1 {
   font-family: "Oi", serif;
   font-weight: 400;
+  line-height: 1.2;
+  color: #2b342b;
+  letter-spacing: 0.2rem;
   text-transform: uppercase;
-  max-width: 100%;
-  font-size: 12rem;
+  font-size: 6rem;
   text-align: center;
-  margin: auto;
-  z-index: -1;
+  margin: 6rem 0 1rem 0;
 }
 
-.hero p {
+#hero p {
   font-size: 1.2rem;
   color: #2b342b;
   margin-bottom: 2rem;
+  text-transform: lowercase;
 }
 
-.dotd-container {
+.dotd-container .drink-card {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+  width: 40%;
+  height: auto;
+  margin: 3rem;
 }
 
 /* Filters */
@@ -58,9 +80,8 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-top: -1rem;
   margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
 .filter-btn {
@@ -74,6 +95,7 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  text-transform: lowercase;
 }
 
 .filter-btn::before {
@@ -95,12 +117,11 @@ body {
 
 .filter-btn:hover {
   color: #2b342b;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
+  transform: translateY(-0.1rem);
 }
 .filter-btn.active {
   color: #2b342b;
-  transform: translateY(-2px);
+  transform: translateY(-0.1rem);
   box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
   font-weight: 600;
 }
@@ -123,8 +144,9 @@ body {
   border-radius: 1.2rem;
   overflow: hidden;
   transition: all 0.3s ease;
-  transform: translateY(2rem);
+  transform: translateY(0.2rem);
   min-width: 420px;
+  border: 2px solid #2b342b;
 }
 
 .drink-card h3 {
@@ -137,7 +159,7 @@ body {
 }
 
 .drink-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-0.2rem);
   box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
 }
 
@@ -154,10 +176,6 @@ body {
   left: 0;
   object-fit: cover;
   transition: transform 0.3s ease;
-}
-
-.drink-card:hover .drink-image img {
-  transform: scale(1.05);
 }
 
 .recipe-btn {
@@ -181,11 +199,12 @@ body {
 .recipe-btn:hover {
   background: white;
   transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
 }
 
 .drink-info {
   padding: 1.5rem;
+  text-align: left;
   width: 55%;
 }
 
@@ -241,7 +260,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Recipe Modal */
+/* Recipe overlay */
 .recipe-overlay {
   position: fixed;
   top: 0;
@@ -338,8 +357,8 @@ body {
 }
 
 .load-more-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+  transform: translateY(-0.1rem);
+  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
 }
 
 .load-more-btn:disabled {
@@ -366,18 +385,7 @@ body {
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(-1rem);
   }
   to {
     opacity: 1;
@@ -388,7 +396,7 @@ body {
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(1rem);
   }
   to {
     opacity: 1;
@@ -411,7 +419,7 @@ body {
     padding: 1rem;
   }
 
-  .hero h1 {
+  #hero h1 {
     font-size: 2rem;
   }
 
