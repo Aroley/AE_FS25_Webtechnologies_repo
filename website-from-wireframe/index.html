@@ -23,7 +23,13 @@
         </div>
       </div>
       <div class="rightnav">
-        <form action="">
+        <div id="search-nav">
+          <button id="prevMatch" class="btn-search">◀</button>
+          <span id="match-counter"></span>
+          <button id="nextMatch" class="btn-search">▶</button>
+        </div>
+
+        <form class="searchForms">
           <div class="form-container">
             <input type="text" placeholder="Search.." name="search" />
             <button class="btn-search" type="submit">
@@ -187,6 +193,6 @@
       </div>
     </section>
 
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
   </body>
 </html>

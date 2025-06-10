@@ -1,0 +1,42 @@
+/** 
+ * A very basic CSS reset:
+ * More about CSS resets: https://meyerweb.com/eric/tools/css/reset/
+ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+h1,
+h2 {
+  margin-bottom: 0.4em;
+}
+
+p {
+  margin-bottom: 90px;
+}
+
+.card {
+  width: 390px;
+  height: 700px;
+  margin: 40px auto 0 auto;
+}
+
+/** 
+ * Just some styling to make the card visible.
+ * Feel free to change this!
+ */
+
+.card {
+  background-color: #d9e5a9;
+  color: black;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.main-image img {
+  width: 100%;
+  display: block;
+}
