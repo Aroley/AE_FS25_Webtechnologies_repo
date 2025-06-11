@@ -11,10 +11,26 @@
     <!-- Hero Section -->
     <section id="hero">
       <div class="container">
-        <h1 class="bg-text">Surprise Alcoholism</h1>
-        <p>get inspired, get wasted</p>
+        <div class="floating-icons">
+          <img src="img/bubble.svg" class="float-icon" alt="bubble" />
+          <img src="img/bubble.svg" class="float-icon" alt="bubble" />
+          <img src="img/bubble.svg" class="float-icon" alt="bubble" />
+          <img src="img/bubble.svg" class="float-icon" alt="bubble" />
+          <img src="img/bubble.svg" class="float-icon" alt="bubble" />
+        </div>
+        <div class="heading">
+          <h1 class="bg-text">
+            Surprise <br />
+            Alcoholism
+          </h1>
+          <p>get inspired, get wasted</p>
+        </div>
         <div class="dotd-container">
           <div id="drink-of-day"></div>
+          <!-- DOTD Here -->
+          <button id="spin-btn" class="spin-btn">
+            Spin for a random Drink
+          </button>
         </div>
       </div>
     </section>
@@ -35,7 +51,9 @@
         </div>
 
         <!-- Drinks Grid -->
-        <div class="drinks-grid" id="drinks-grid"></div>
+        <div class="drinks-grid" id="drinks-grid">
+          <!-- Drinks Here -->
+        </div>
 
         <!-- Load More Button -->
         <div class="load-more-container">
@@ -49,8 +67,8 @@
     <!-- Recipe Overlay -->
     <div class="recipe-overlay" id="recipe-overlay">
       <div class="recipe-content">
-        <button class="close-btn" id="close-modal">&times;</button>
-        <div id="recipe-details"></div>
+        <button class="close-btn" id="close-overlay">&times;</button>
+        <div id="recipe-details"><!-- Recipe Here --></div>
       </div>
     </div>
   </body>

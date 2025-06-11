@@ -7,13 +7,12 @@
 }
 
 body {
-  background: url(img/AdobeStock_147226346.jpeg);
+  background: url(img/GlassOfAlcohol.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-
-  height: 300vh;
+  height: fit-content;
   color: #2b342b;
   line-height: 1.5;
 }
@@ -28,13 +27,88 @@ body {
 
 /* Hero Section */
 #hero {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  opacity: 0;
+  opacity: 1;
   animation: fadeInDown 0.8s ease-out forwards;
-  background-color: #e9ece7;
-  height: 100vh;
+  background-color: #2b342b;
+  min-height: 100vh;
+  height: fit-content;
+  color: #e9ece7;
+  overflow: hidden;
+}
+
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.float-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+  animation: floatUp 12s linear infinite;
+}
+
+/* Random positions and delays */
+.float-icon:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 12s;
+}
+.float-icon:nth-child(2) {
+  left: 30%;
+  animation-delay: 2s;
+  animation-duration: 10s;
+}
+.float-icon:nth-child(3) {
+  left: 50%;
+  animation-delay: 4s;
+  animation-duration: 14s;
+}
+.float-icon:nth-child(4) {
+  left: 70%;
+  animation-delay: 1s;
+  animation-duration: 11s;
+}
+.float-icon:nth-child(5) {
+  left: 90%;
+  animation-delay: 3s;
+  animation-duration: 13s;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -20%;
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    bottom: 120%;
+    opacity: 0;
+    transform: translateY(-20px) rotate(360deg);
+  }
+}
+
+.dotd-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #drink-of-day {
@@ -45,34 +119,92 @@ body {
   width: 100%;
   max-width: 1200px;
   margin: auto;
+  height: fit-content;
+}
+
+.heading {
+  text-align: center;
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
 }
 
 #hero h1 {
+  display: inline-block;
   font-family: "Oi", serif;
   font-weight: 400;
   line-height: 1.2;
-  color: #2b342b;
+  color: #e9ece7;
   letter-spacing: 0.2rem;
   text-transform: uppercase;
-  font-size: 6rem;
+  font-size: clamp(2rem, 8vw, 6rem);
   text-align: center;
-  margin: 6rem 0 1rem 0;
+  margin: 2.5rem auto;
+  max-width: 90vw;
 }
 
 #hero p {
-  font-size: 1.2rem;
-  color: #2b342b;
-  margin-bottom: 2rem;
-  text-transform: lowercase;
+  font-size: 1.4rem;
 }
 
-.dotd-container .drink-card {
+#drink-of-day .drink-card {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   margin-bottom: 2rem;
-  width: 40%;
-  height: auto;
+  color: #2b342b;
+  min-width: 40%;
+  max-width: 60%;
+  min-height: fit-content;
   margin: 3rem;
+}
+
+#drink-of-day .drink-card:hover {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
+}
+
+#drink-of-day span {
+  font-size: 0.9rem;
+}
+
+#drink-of-day .drink-card h3 {
+  font-size: 2rem;
+}
+
+#drink-of-day .drink-card p {
+  font-size: 1.2rem;
+}
+
+/* Hero Roulette */
+.spin-btn {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 4rem;
+  background-color: #64e73c;
+  box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
+}
+
+.spin-btn:hover {
+  background-color: #2b342b;
+  color: #e9ece7;
+  transform: translateY(-0.1rem);
+}
+
+/* Content */
+
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: rgba(43, 52, 43, 0.6);
+  height: fit-content;
 }
 
 /* Filters */
@@ -81,7 +213,6 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: -1rem;
   margin-bottom: 3rem;
 }
 
@@ -106,7 +237,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #61ee03;
+  background: #64e73c;
   transition: top 0.3s ease;
   z-index: -1;
 }
@@ -117,11 +248,11 @@ body {
 }
 
 .filter-btn:hover {
-  color: #2b342b;
+  color: #e9ece7;
   transform: translateY(-0.1rem);
 }
 .filter-btn.active {
-  color: #2b342b;
+  color: #e9ece7;
   transform: translateY(-0.1rem);
   box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
   font-weight: 600;
@@ -130,29 +261,38 @@ body {
 /* Drinks Grid */
 .drinks-grid {
   display: flex;
+  align-items: stretch;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 2rem;
   justify-content: center;
   margin-bottom: 3rem;
 }
 
 .drink-card {
-  flex: 0 1 30%;
+  display: flex;
+  flex: 0 1;
   flex-direction: row;
-  height: 12rem;
   text-align: center;
   background: white;
   border-radius: 1.2rem;
   overflow: hidden;
   transition: all 0.3s ease;
   transform: translateY(0.2rem);
-  min-width: 420px;
+  min-width: 400px;
+  max-width: 40%;
   border: 2px solid #2b342b;
+  color: #2b342b;
 }
 
 .drink-card h3 {
   font-family: "Georgia", serif;
   font-weight: 600;
+  color: #2b342b;
+}
+
+.drink-card p {
+  font-size: 0.9rem;
+  color: #2b342b;
 }
 
 .drink-card.fade-in {
@@ -212,8 +352,9 @@ body {
 .drink-title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #2b342b;
+  color: #e9ece7;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .drink-badge-container {
@@ -233,7 +374,7 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.1rem;
   transform: rotate(-90deg);
 }
 
@@ -253,7 +394,7 @@ body {
 }
 
 .drink-details {
-  color: #2b342b;
+  color: #e9ece7;
   font-size: 0.9rem;
 }
 
@@ -284,10 +425,10 @@ body {
 }
 
 .recipe-content {
-  background: #2b342b;
+  background: #e9ece7;
   border-radius: 1rem;
   padding: 2rem;
-  color: #e9ece7;
+  color: #2b342b;
   max-width: 500px;
   max-height: 80vh;
   overflow-y: auto;
@@ -313,12 +454,12 @@ body {
 }
 
 .close-btn:hover {
-  color: #2b342b;
+  color: #e9ece7;
 }
 
 .recipe-title {
   font-size: 1.5rem;
-  color: #61ee03;
+  color: #64e73c;
   margin-bottom: 1rem;
 }
 
@@ -329,11 +470,11 @@ body {
 
 .ingredients-list li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #e9ece7;
+  border-bottom: 1px solid #2b342b;
 }
 
 .instructions {
-  color: #e9ece7;
+  color: #2b342b;
   line-height: 1.8;
 }
 
@@ -345,21 +486,22 @@ body {
 }
 
 .load-more-btn {
+  margin-top: 1rem;
   padding: 1rem 2rem;
-  background: #2b342b;
-  color: #e9ece7;
-  border: none;
-  border-radius: 2rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  border-radius: 4rem;
+  color: #e9ece7;
+  background-color: #2b342b;
+
+  box-shadow: 0 5px 15px rgba(43, 52, 43, 0.6);
 }
 
 .load-more-btn:hover {
+  background-color: #2b342b;
+  color: #2b342b;
+  background-color: #64e73c;
   transform: translateY(-0.1rem);
-  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
 }
 
 .load-more-btn:disabled {
@@ -415,7 +557,29 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media only screen and (max-width: 1080px) {
+  .container {
+    padding: 1rem;
+  }
+
+  #hero h1 {
+    font-size: 3rem;
+  }
+
+  .dotd-container span {
+    font-size: 1rem;
+  }
+
+  .dotd-container .drink-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .dotd-container .drink-card p {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .container {
     padding: 1rem;
   }

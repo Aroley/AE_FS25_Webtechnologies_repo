@@ -4,6 +4,7 @@ class CocktailApp {
     this.seenDrinkIds = new Set();
     this.currentFilter = "All";
     this.isLoading = false;
+    this.drinkPool = []; // Used by spinForDrink
     this.init();
   }
 
@@ -18,23 +19,27 @@ class CocktailApp {
       btn.addEventListener("click", (e) => this.handleFilter(e));
     });
 
+    document.getElementById("spin-btn").addEventListener("click", () => {
+      this.spinForDrink();
+    });
+
     document.getElementById("load-more-btn").addEventListener("click", () => {
       this.loadRandomDrinks(6);
     });
 
-    document.getElementById("close-modal").addEventListener("click", () => {
-      this.closeModal();
+    document.getElementById("close-overlay").addEventListener("click", () => {
+      this.closeOverlay();
     });
 
     document.getElementById("recipe-overlay").addEventListener("click", (e) => {
       if (e.target.id === "recipe-overlay") {
-        this.closeModal();
+        this.closeOverlay();
       }
     });
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        this.closeModal();
+        this.closeOverlay();
       }
     });
   }
@@ -46,8 +51,7 @@ class CocktailApp {
       );
       const data = await response.json();
       const drink = data.drinks[0];
-
-      const card = this.createDrinkCard(drink, true);
+      const card = this.createDrinkCard(drink);
       document.getElementById("drink-of-day").appendChild(card);
     } catch (error) {
       console.error("Error loading drink of the day:", error);
@@ -88,7 +92,6 @@ class CocktailApp {
           (d) => !this.seenDrinkIds.has(d.idDrink)
         );
 
-        // Shuffle
         for (let i = allOptions.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [allOptions[i], allOptions[j]] = [allOptions[j], allOptions[i]];
@@ -107,14 +110,21 @@ class CocktailApp {
       }
 
       this.allDrinks.push(...drinks);
-
       const grid = document.getElementById("drinks-grid");
+
       drinks.forEach((drink) => {
         const card = this.createDrinkCard(drink);
         grid.appendChild(card);
       });
 
-      this.applyFilter(this.currentFilter);
+      if (this.currentFilter === "All") {
+        const cards = document.querySelectorAll("#drinks-grid .drink-card");
+        cards.forEach((card) => {
+          card.style.display = "flex";
+        });
+      } else {
+        this.applyFilter(this.currentFilter);
+      }
     } catch (error) {
       console.error("Error loading drinks:", error);
     } finally {
@@ -125,48 +135,44 @@ class CocktailApp {
     }
   }
 
-  createDrinkCard(drink, isDrinkOfDay = false) {
-    const card = document.createElement("div");
-    card.className = "drink-card";
-    card.dataset.alcoholic = drink.strAlcoholic;
+  createDrinkCard(drink) {
+    const drinkCard = document.createElement("div");
+    drinkCard.classList.add("drink-card");
+    drinkCard.dataset.alcoholic = drink.strAlcoholic;
 
-    const badgeClass =
-      drink.strAlcoholic === "Alcoholic"
-        ? "badge-alcoholic"
-        : drink.strAlcoholic === "Non alcoholic"
-        ? "badge-non-alcoholic"
-        : "badge-optional";
-
-    card.innerHTML = `
+    drinkCard.innerHTML = `
       <div class="drink-image">
-        <img src="${drink.strDrinkThumb}" alt="${
-      drink.strDrink
-    }" loading="lazy">
-        <button class="recipe-btn" title="View Recipe">📋</button>
+        <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}" loading="lazy">
+        <button class="recipe-btn" title="View Recipe">i</button>
       </div>
-      <div class="drink-badge-container ${badgeClass}">
-        <span class="drink-badge ${badgeClass}">${drink.strAlcoholic}</span>
+      <div class="drink-badge-container">
+        <span class="drink-badge">${drink.strAlcoholic}</span>
       </div>
       <div class="drink-info">
         <h3 class="drink-title">${drink.strDrink}</h3>
         <div class="drink-details">
-          <p><strong>Category:</strong> ${drink.strCategory}</p>
-          <p><strong>Glass:</strong> ${drink.strGlass}</p>
-          ${
-            drink.strTags
-              ? `<p><strong>Tags:</strong> ${drink.strTags}</p>`
-              : ""
-          }
+          <p><strong>Category:</strong><br> ${drink.strCategory}</p>
+          <p><strong>Serve in:</strong><br> ${drink.strGlass}</p>
         </div>
       </div>
     `;
 
-    card.querySelector(".recipe-btn").addEventListener("click", (e) => {
-      e.stopPropagation();
+    const badgeContainer = drinkCard.querySelector(".drink-badge-container");
+
+    if (drink.strAlcoholic === "Alcoholic") {
+      badgeContainer.classList.add("badge-alcoholic");
+    } else if (drink.strAlcoholic === "Non alcoholic") {
+      badgeContainer.classList.add("badge-non-alcoholic");
+    } else {
+      badgeContainer.classList.add("badge-optional");
+    }
+
+    const recipeBtn = drinkCard.querySelector(".recipe-btn");
+    recipeBtn.addEventListener("click", () => {
       this.showRecipe(drink);
     });
 
-    return card;
+    return drinkCard;
   }
 
   showRecipe(drink) {
@@ -193,7 +199,7 @@ class CocktailApp {
     document.getElementById("recipe-overlay").classList.add("show");
   }
 
-  closeModal() {
+  closeOverlay() {
     document.getElementById("recipe-overlay").classList.remove("show");
   }
 
@@ -225,6 +231,89 @@ class CocktailApp {
       }
     });
   }
+
+  loadInitialHeroCard(drink) {
+    const hero = document.getElementById("drink-of-day");
+    hero.querySelectorAll(".drink-card").forEach((card) => card.remove());
+    const newCard = this.createDrinkCard(drink);
+    newCard.classList.add("fade-in");
+    hero.prepend(newCard);
+  }
+
+  updateDrinkOfDay(drink) {
+    if (drink) {
+      const drinkCard = this.createDrinkCard(drink);
+      const drinkOfDay = document.getElementById("drink-of-day");
+      drinkOfDay.innerHTML = "";
+      drinkOfDay.appendChild(drinkCard);
+    }
+  }
+
+  async fetchRandomDrinks(count = 10) {
+    try {
+      const drinks = [];
+      for (let i = 0; i < count; i++) {
+        const response = await fetch(
+          "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+        );
+        const data = await response.json();
+        drinks.push(data.drinks[0]);
+      }
+      return drinks;
+    } catch (error) {
+      console.error("Error fetching random drinks:", error);
+      return [];
+    }
+  }
+
+  async spinForDrink() {
+    if (this.drinkPool.length === 0) {
+      this.drinkPool = await this.fetchRandomDrinks(12);
+    }
+
+    let interval = 100;
+    let elapsedTime = 0;
+
+    const spinBtn = document.getElementById("spin-btn");
+    spinBtn.disabled = true;
+
+    const spinInterval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * this.drinkPool.length);
+      const randomDrink = this.drinkPool[randomIndex];
+      this.updateDrinkOfDay(randomDrink);
+      elapsedTime += interval;
+      if (elapsedTime >= 3000) {
+        clearInterval(spinInterval);
+        this.showFinalDrink();
+      } else {
+        interval += 50;
+      }
+    }, interval);
+  }
+
+  showFinalDrink() {
+    const finalDrink =
+      this.drinkPool[Math.floor(Math.random() * this.drinkPool.length)];
+    this.updateDrinkOfDay(finalDrink);
+
+    // Make sure the spin button is re-enabled
+    const spinBtn = document.getElementById("spin-btn");
+    if (spinBtn) {
+      spinBtn.disabled = false;
+      spinBtn.style.display = "flex";
+    }
+  }
 }
 
-new CocktailApp();
+// Initialize the app when the page is ready
+document.addEventListener("DOMContentLoaded", async () => {
+  const app = new CocktailApp();
+
+  const res = await fetch(
+    "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+  );
+  const data = await res.json();
+  const initialDrink = data.drinks[0];
+
+  app.loadInitialHeroCard(initialDrink);
+});
