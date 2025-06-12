@@ -305,6 +305,51 @@ class CocktailApp {
   }
 }
 
+// Floating Icons
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".floating-icons");
+
+  function createBubble() {
+    const bubble = document.createElement("img");
+    bubble.src = "img/bubble.svg";
+    bubble.classList.add("float-icon", "bubble");
+    bubble.draggable = false;
+
+    const size = Math.random() * 40 + 20;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${5 + Math.random() * 5}s`;
+    bubble.addEventListener("click", (e) => {
+      const rect = bubble.getBoundingClientRect();
+      const parentRect = container.getBoundingClientRect();
+      const top = rect.top - parentRect.top;
+      const left = rect.left - parentRect.left;
+
+      // Freeze position before animating
+      bubble.style.animation = "none";
+      bubble.style.top = `${top}px`;
+      bubble.style.left = `${left}px`;
+      bubble.style.position = "absolute";
+      bubble.style.transform = `scale(1)`;
+      bubble.style.pointerEvents = "none";
+      bubble.style.animation = "pop 0.3s forwards";
+
+      bubble.addEventListener("animationend", () => {
+        bubble.remove();
+      });
+    });
+
+    bubble.addEventListener("animationend", () => {
+      if (bubble.parentElement) bubble.remove();
+    });
+
+    container.appendChild(bubble);
+  }
+
+  setInterval(createBubble, 800);
+});
+
 // Initialize the app when the page is ready
 document.addEventListener("DOMContentLoaded", async () => {
   const app = new CocktailApp();
