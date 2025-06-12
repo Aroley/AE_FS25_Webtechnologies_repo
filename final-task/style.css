@@ -241,11 +241,11 @@ body {
 }
 
 .filter-btn:hover {
-  color: #e9ece7;
+  color: #2b342b;
   transform: translateY(-0.1rem);
 }
 .filter-btn.active {
-  color: #e9ece7;
+  color: #2b342b;
   transform: translateY(-0.1rem);
   box-shadow: 0 5px 15px rgba(97, 238, 3, 0.3);
   font-weight: 600;
@@ -288,13 +288,9 @@ body {
   color: #2b342b;
 }
 
-.drink-card.fade-in {
-  animation: slideInUp 0.6s ease-out forwards;
-}
-
 .drink-card:hover {
   transform: translateY(-0.2rem);
-  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
+  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.3);
 }
 
 .drink-image {
@@ -333,7 +329,7 @@ body {
 .recipe-btn:hover {
   background: white;
   transform: scale(1.05);
-  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.15);
+  box-shadow: 0 20px 40px rgba(34, 34, 34, 0.3);
 }
 
 .drink-info {
@@ -348,6 +344,7 @@ body {
   color: #e9ece7;
   margin-bottom: 1rem;
   line-height: 1.2;
+  text-wrap: wrap;
 }
 
 .drink-badge-container {
@@ -573,6 +570,38 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+  #hero .drink-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    width: 90%;
+    height: fit-content;
+    max-height: 50%;
+    margin-bottom: 2rem;
+  }
+
+  #hero .drink-image {
+    width: 100%;
+    height: auto;
+    max-height: 40%;
+  }
+
+  #hero .drink-info {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  #hero .drink-badge-container {
+    width: 100%;
+    min-height: 2rem;
+  }
+
+  #hero .drink-badge {
+    transform: rotate(0deg);
+  }
+
   .container {
     padding: 1rem;
   }
@@ -597,5 +626,44 @@ body {
   .filter-btn {
     padding: 0.6rem 1rem;
     font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .drink-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    width: 90%;
+    height: fit-content;
+    max-height: 20%;
+    margin-bottom: 2rem;
+  }
+
+  .drink-image {
+    width: 100%;
+    height: auto;
+    max-height: 40%;
+  }
+
+  .drink-info {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .drink-badge-container {
+    width: 100%;
+    min-height: 2rem;
+  }
+
+  .drink-badge {
+    transform: rotate(0deg);
+  }
+
+  .recipe-content {
+    padding: 1rem;
+    max-width: 90%;
   }
 }

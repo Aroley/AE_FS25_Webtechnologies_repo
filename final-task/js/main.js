@@ -167,8 +167,13 @@ class CocktailApp {
       badgeContainer.classList.add("badge-optional");
     }
 
+    drinkCard.addEventListener("click", () => {
+      this.showRecipe(drink);
+    });
+
     const recipeBtn = drinkCard.querySelector(".recipe-btn");
-    recipeBtn.addEventListener("click", () => {
+    recipeBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent parent card click
       this.showRecipe(drink);
     });
 
@@ -304,12 +309,14 @@ class CocktailApp {
     }
   }
 }
-
-// Floating Icons
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".floating-icons");
+  const MAX_BUBBLES = 20;
+  let currentBubbles = 0;
 
   function createBubble() {
+    if (currentBubbles >= MAX_BUBBLES) return;
+
     const bubble = document.createElement("img");
     bubble.src = "img/bubble.svg";
     bubble.classList.add("float-icon", "bubble");
@@ -320,13 +327,16 @@ document.addEventListener("DOMContentLoaded", () => {
     bubble.style.height = `${size}px`;
     bubble.style.left = `${Math.random() * 100}%`;
     bubble.style.animationDuration = `${5 + Math.random() * 5}s`;
+
+    // Increase bubble count
+    currentBubbles++;
+
     bubble.addEventListener("click", (e) => {
       const rect = bubble.getBoundingClientRect();
       const parentRect = container.getBoundingClientRect();
       const top = rect.top - parentRect.top;
       const left = rect.left - parentRect.left;
 
-      // Freeze position before animating
       bubble.style.animation = "none";
       bubble.style.top = `${top}px`;
       bubble.style.left = `${left}px`;
@@ -337,17 +347,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       bubble.addEventListener("animationend", () => {
         bubble.remove();
+        currentBubbles--;
       });
     });
 
     bubble.addEventListener("animationend", () => {
-      if (bubble.parentElement) bubble.remove();
+      if (bubble.parentElement) {
+        bubble.remove();
+        currentBubbles--;
+      }
     });
 
     container.appendChild(bubble);
   }
 
-  setInterval(createBubble, 800);
+  setInterval(createBubble, 600);
 });
 
 // Initialize the app when the page is ready
